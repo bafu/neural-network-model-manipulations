@@ -96,8 +96,13 @@ def cost_function(theta1, theta2, input_layer_size, hidden_layer_size, output_la
         theta2: (10, 26)
         inputs: (5000, 400)
         labels: (5000, 1)
+
+    return: cost and weights
     '''
-    # construct neural network
+    # Construct neural network.
+    #
+    # Forward propagation is to get h_theta(x), and is done during the
+    # construction.
     input_layer = np.insert(inputs, 0, 1, axis=1)  # add bias, 5000x401
 
     hidden_layer = np.dot(input_layer, np.transpose(theta1))
@@ -110,7 +115,7 @@ def cost_function(theta1, theta2, input_layer_size, hidden_layer_size, output_la
     #print('hidden layer shape: {}'.format(hidden_layer.shape))
     #print('output layer shape: {}'.format(output_layer.shape))
 
-    # forward propagation: calculate cost
+    # Calculate cost
     cost = 0.0
     for training_index in xrange(len(inputs)):
         # transform label y[i] from a number to a vector.
@@ -135,6 +140,12 @@ def cost_function(theta1, theta2, input_layer_size, hidden_layer_size, output_la
         # transform label y[i] from a number to a vector.
         outputs = np.zeros((1, output_layer_size))  # (1,10)
         outputs[0][labels[index]-1] = 1
+
+        # Forward propagation has been done in network construction, aka
+        # we already have h_theta(x) (aka output_layer).
+        #
+        # FIXME: output_layer is an improper name.  It should be the
+        #        output of the output layer.
 
         # calculate delta3
         delta3 = (output_layer[index] - outputs).T  # (10,1)
