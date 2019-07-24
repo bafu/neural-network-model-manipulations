@@ -9,3 +9,7 @@ Simple examples demonstrating techniques of deep learning model manipulation.
 # Setup development environment
 
 Please refer to <tech blog post>.
+
+# Misc.
+
+`src/dataset/*` are dataset retrivers copied from Keras.
